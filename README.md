@@ -94,4 +94,4 @@ npm run format     # Format semua file pakai Prettier
 ```
 
 ## 📃 Lisensi
-MIT © 2025 Sabet Maulana
+© 2025 Sabet Maulana
