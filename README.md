@@ -28,7 +28,7 @@ RESTful API sederhana untuk mengelola daftar tugas harian (to-do list), dibuat m
 ## 📦 Instalasi
 
 ```bash
-git clone [https://github.com/saabet/simple-task-manager.git]
+git clone https://github.com/saabet/simple-task-manager.git
 cd simple-task-manager
 
 npm install
