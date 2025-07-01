@@ -57,17 +57,19 @@ node server.js
 ## 📫 Endpoint Utama
 
 🔹 User
-  * `POST /users` → Buat user
-  * `GET /users/{id}` → Ambil data user
+
+- `POST /users` → Buat user
+- `GET /users/{id}` → Ambil data user
 
 🔹 Task
-  * `POST /tasks` → Tambah tugas
-  * `GET /tasks` → Lihat semua tugas
-  * `GET /tasks/{id}` → Lihat detail tugas
-  * `PUT /tasks/{id}` → Ubah tugas
-  * `DELETE /tasks/{id}` → Hapus tugas
-  * `GET /users/{id}/tasks` → Lihat tugas berdasarkan user
-  * `GET /tasks?status=done` → Filter berdasarkan status
+
+- `POST /tasks` → Tambah tugas
+- `GET /tasks` → Lihat semua tugas
+- `GET /tasks/{id}` → Lihat detail tugas
+- `PUT /tasks/{id}` → Ubah tugas
+- `DELETE /tasks/{id}` → Hapus tugas
+- `GET /users/{id}/tasks` → Lihat tugas berdasarkan user
+- `GET /tasks?status=done` → Filter berdasarkan status
 
 ---
 
@@ -82,7 +84,6 @@ node server.js
   "due_date": "2025-07-01",
   "user_id": 1
 }
-
 ```
 
 ## 🧪 Linting & Formatting
@@ -94,4 +95,5 @@ npm run format     # Format semua file pakai Prettier
 ```
 
 ## 📃 Lisensi
+
 © 2025 Sabet Maulana
