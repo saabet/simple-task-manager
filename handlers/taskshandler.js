@@ -1,5 +1,6 @@
 const db = require('../db/database');
 const { createTaskSchema } = require('../validations/taskValidation');
+const { updateTaskSchema } = require('../validations/taskValidation');
 
 const createTask = async (request, h) => {
   const { error, value } = createTaskSchema.validate(request.payload);
@@ -78,8 +79,69 @@ const getTaskbyId = async (request, h) => {
   });
 };
 
+const updateTask = async (request, h) => {
+  const { id } = request.payload;
+  const { error, value } = updateTaskSchema.validate(request.payload);
+
+  if (error) {
+    return h.response({ status: 'fail', message: error.message }).code(400);
+  }
+
+  const fields = Object.keys(value);
+  if (fields.length === 0) {
+    return h
+      .response({ status: 'fail', message: 'No fields to update.' })
+      .code(400);
+  }
+
+  const query = `UPDATE tasks SET ${fields.map((f) => `${f} = ?`).join(', ')} WHERE id = ?`;
+  const values = [...fields.map((f) => value[f]), id];
+
+  return new Promise((resolve) => {
+    db.run(query, values, function (err) {
+      if (err) {
+        resolve(
+          h.response({ status: 'error', message: err.message }).code(500),
+        );
+      } else if (this.changes === 0) {
+        resolve(
+          h.response({ status: 'fail', message: 'Task not found' }).code(404),
+        );
+      } else {
+        resolve(
+          h.response({ status: 'success', message: 'Task updated' }).code(200),
+        );
+      }
+    });
+  });
+};
+
+const deleteTask = async (request, h) => {
+  const { id } = request.params;
+
+  return new Promise((resolve) => {
+    db.run('DELETE FROM tasks WHERE id = ?', [id], function (err) {
+      if (err) {
+        resolve(
+          h.response({ status: 'error', message: err.message }).code(500),
+        );
+      } else if (this.changes === 0) {
+        resolve(
+          h.response({ status: 'fail', message: 'Task not found' }).code(404),
+        );
+      } else {
+        resolve(
+          h.response({ status: 'success', message: 'Task deleted' }).code(200),
+        );
+      }
+    });
+  });
+};
+
 module.exports = {
   createTask,
   getAllTasks,
   getTaskbyId,
+  updateTask,
+  deleteTask,
 };

@@ -8,4 +8,11 @@ const createTaskSchema = Joi.object({
   user_id: Joi.number().integer().required(),
 });
 
-module.exports = { createTaskSchema };
+const updateTaskSchema = Joi.object({
+  title: Joi.string().min(3).optional(),
+  description: Joi.string().allow('').optional(),
+  status: Joi.string().valid('pending', 'in_progress', 'done').optional(),
+  due_date: Joi.string().isoDate().optional(),
+});
+
+module.exports = { createTaskSchema, updateTaskSchema };

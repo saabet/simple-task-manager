@@ -1,4 +1,4 @@
-const taskHandler = require('../handlers/taskshandler');
+const taskHandler = require('../handlers/tasksHandler');
 
 module.exports = [
   {
@@ -15,5 +15,15 @@ module.exports = [
     method: 'GET',
     path: '/tasks/{id}',
     handler: taskHandler.getTaskbyId,
+  },
+  {
+    method: 'PUT',
+    path: '/tasks/{id}',
+    handler: taskHandler.updateTask,
+  },
+  {
+    method: 'DELETE',
+    path: '/tasks/{id}',
+    handler: taskHandler.deleteTask,
   },
 ];
