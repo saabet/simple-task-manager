@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 const path = require('path');
 const dbPath = path.resolve(__dirname, 'tasks.db');
-const schemaPath = path.resolve(__dirname, '../module/schema.sql');
+const schemaPath = path.resolve(__dirname, '../models/schema.sql');
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {

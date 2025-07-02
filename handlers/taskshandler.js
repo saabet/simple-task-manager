@@ -78,9 +78,9 @@ const getTaskbyId = async (request, h) => {
           h.response({ status: 'error', message: err.message }).code(500),
         );
       } else if (!row) {
-        resolve(h.response({ status: 'fail', message: 'task not found' })).code(
+        resolve(h.response({ status: 'fail', message: 'task not found' }).code(
           404,
-        );
+        ));
       } else {
         resolve(h.response({ status: 'success', data: row }).code(200));
       }
@@ -106,7 +106,7 @@ const getTasksByUser = async (request, h) => {
 };
 
 const updateTask = async (request, h) => {
-  const { id } = request.payload;
+  const { id } = request.params;
   const { error, value } = updateTaskSchema.validate(request.payload);
 
   if (error) {

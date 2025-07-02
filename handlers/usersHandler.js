@@ -27,7 +27,7 @@ const createUser = async (request, h) => {
             h
               .response({
                 status: 'success',
-                data: { id: tjis.lastID, name, email },
+                data: { id: this.lastID, name, email },
               })
               .code(201),
           );
