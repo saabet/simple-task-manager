@@ -100,7 +100,9 @@ const getTasksByUser = async (request, h) => {
           return resolve(response_error(h, err2.message));
         }
         if (rows.length === 0) {
-          return resolve(response_success(h, [], 'No tasks found for this user'));
+          return resolve(
+            response_success(h, [], 'No tasks found for this user'),
+          );
         }
         return resolve(response_success(h, rows));
       });
