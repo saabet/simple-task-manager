@@ -57,7 +57,6 @@ node server.js
 │   └── taskValidation.js
 ├── utils/
 │   └── responseFormatter.js
-├── .env.example
 ├── .gitignore
 ├── README.md
 └── server.js
