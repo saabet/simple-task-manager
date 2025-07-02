@@ -17,6 +17,11 @@ module.exports = [
     handler: taskHandler.getTaskbyId,
   },
   {
+    method: 'GET',
+    path: '/users/{id}/tasks',
+    handler: taskHandler.getTasksByUser,
+  },
+  {
     method: 'PUT',
     path: '/tasks/{id}',
     handler: taskHandler.updateTask,

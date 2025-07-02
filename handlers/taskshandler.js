@@ -44,9 +44,18 @@ const createTask = async (request, h) => {
 };
 
 const getAllTasks = async (request, h) => {
+  const { status } = request.query;
+
+  let query = 'SELECT * FROM tasks';
+  const params = [];
+
+  if (status) {
+    query += 'WHERE status = ?';
+    params.push(status);
+  }
+
   return new Promise((resolve) => {
-    const query = 'SELECT * FROM tasks';
-    db.all(query, [], (err, rows) => {
+    db.all(query, params, (err, rows) => {
       if (err) {
         resolve(
           h.response({ status: 'error', message: err.message }).code(500),
@@ -74,6 +83,23 @@ const getTaskbyId = async (request, h) => {
         );
       } else {
         resolve(h.response({ status: 'success', data: row }).code(200));
+      }
+    });
+  });
+};
+
+const getTasksByUser = async (request, h) => {
+  const { id } = request.params;
+
+  return new Promise((resolve) => {
+    const query = 'SELECT * FROM tasks WHERE id = ?';
+    db.all(query, [id], (err, rows) => {
+      if (err) {
+        resolve(
+          h.response({ status: 'error', message: err.message }).code(500),
+        );
+      } else {
+        resolve(h.response({ status: 'success', data: rows }).code(200));
       }
     });
   });
@@ -142,6 +168,7 @@ module.exports = {
   createTask,
   getAllTasks,
   getTaskbyId,
+  getTasksByUser,
   updateTask,
   deleteTask,
 };
