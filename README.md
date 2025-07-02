@@ -6,11 +6,14 @@ RESTful API sederhana untuk mengelola daftar tugas harian (to-do list), dibuat m
 
 ## 🚀 Fitur
 
-- 🔐 Buat dan ambil data user
-- ✅ Buat, baca, update, dan hapus tugas
-- 🔍 Filter tugas berdasarkan status dan pengguna
-- 📄 Validasi input dengan Joi
-- 🎯 Mengikuti style guide Airbnb + Prettier
+- ✅ CRUD Users
+- ✅ CRUD Tasks
+- ✅ Filter task berdasarkan `status`
+- ✅ Lihat semua task berdasarkan `user_id`
+- ✅ Validasi data menggunakan Joi
+- ✅ Response formatter standar (`success`, `fail`, `error`)
+- ✅ Penanganan 404 endpoint tidak ditemukan
+- ✅ Cek apakah user benar-benar ada sebelum mengambil task miliknya
 
 ---
 
@@ -41,35 +44,43 @@ node server.js
 
 ```bash
 .
-├── db/              # Koneksi dan setup database SQLite
-├── handlers/        # Logic untuk endpoint users & tasks
-├── models/          # SQL schema
-├── routes/          # Definisi endpoint Hapi.js
-├── validations/     # Validasi input menggunakan Joi
-├── utils/           # Helper function (optional)
-├── .eslintrc        # Aturan linting (Airbnb + Prettier)
-├── .prettierrc      # Aturan format kode
-├── server.js        # Entry point server
+├── db/
+│   └── database.js
+├── handlers/
+│   ├── usersHandler.js
+│   └── tasksHandler.js
+├── routes/
+│   ├── usersRoutes.js
+│   └── tasksRoutes.js
+├── validations/
+│   ├── userValidation.js
+│   └── taskValidation.js
+├── utils/
+│   └── responseFormatter.js
+├── .env.example
+├── .gitignore
+├── README.md
+└── server.js
 ```
 
 ---
 
-## 📫 Endpoint Utama
+## 📫 Endpoint API
 
 🔹 User
 
-- `POST /users` → Buat user
-- `GET /users/{id}` → Ambil data user
+- `POST /users` → Membuat user baru
+- `GET /users/{id}` → Mengambil data user
 
 🔹 Task
 
-- `POST /tasks` → Tambah tugas
-- `GET /tasks` → Lihat semua tugas
-- `GET /tasks/{id}` → Lihat detail tugas
-- `PUT /tasks/{id}` → Ubah tugas
-- `DELETE /tasks/{id}` → Hapus tugas
-- `GET /users/{id}/tasks` → Lihat tugas berdasarkan user
-- `GET /tasks?status=done` → Filter berdasarkan status
+- `POST /tasks` → Menambah tugas
+- `GET /tasks` → Melihat semua tugas
+- `GET /tasks/{id}` → Melihat detail tugas
+- `PUT /tasks/{id}` → Mengubah tugas
+- `DELETE /tasks/{id}` → Menghapus tugas
+- `GET /users/{id}/tasks` → Melihat tugas berdasarkan user
+- `GET /tasks?status=done` → Memfilter tugas berdasarkan status
 
 ---
 
@@ -89,9 +100,8 @@ node server.js
 ## 🧪 Linting & Formatting
 
 ```bash
-npm run lint       # Cek masalah
-npm run lint:fix   # Perbaiki otomatis
-npm run format     # Format semua file pakai Prettier
+npm run lint
+npm run format
 ```
 
 ## 📃 Lisensi
